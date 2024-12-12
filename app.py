@@ -23,10 +23,6 @@ try:
 except Exception:
     st.write("Kaskad sınıflandırıcıları yüklenirken hata oluştu")
 
-# Kamerayı başlatalım
-
-cap = cv2.VideoCapture(cv2.CAP_DSHOW)  # İlk kamerayı açıyoruz (0 genellikle dahili kameradır)
-
 
 def video_frame_callback(frame: av.VideoFrame) -> av.VideoFrame:
     img = frame.to_ndarray(format="bgr24")  # av.VideoFrame'i numpy array'ine dönüştür
@@ -72,11 +68,8 @@ frame_placeholder_1 = col1.empty()
 frame_placeholder_2 = col2.empty()
 
 with frame_placeholder_1:
-    webrtc_streamer(
-        key="camera2",
-        mode=WebRtcMode.SENDRECV,
-        rtc_configuration={"iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]},
-        media_stream_constraints={"video": True, "audio": False},
+    st.camera_input("Take a picture"
+
     )
 with frame_placeholder_2:
     webrtc_streamer(
